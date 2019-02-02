@@ -16,12 +16,26 @@ import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_TAGS', fetchTags);
+    yield takeEvery('FETCH_PROJECTS', fetchProjects);
 }
 
+//Gets all tags from server and sends them to tags reducer
 function* fetchTags(action) {
     try {
         const tags = yield axios.get('/tags');
-        const nextAction = { type: 'SET_TAGS', payload: tags };
+        const nextAction = { type: 'SET_TAGS', payload: tags.data };
+        yield put(nextAction);
+    } catch (error) {
+        console.log(error);
+        alert(error);
+    }
+}
+
+//Gets all Projects from server and sends them to Projects reducer
+function* fetchProjects(action) {
+    try {
+        const projects = yield axios.get('/projects');
+        const nextAction = { type: 'SET_PROJECTS', payload: projects.data };
         yield put(nextAction);
     } catch (error) {
         console.log(error);
@@ -46,7 +60,7 @@ const projects = (state = [], action) => {
 const tags = (state = [], action) => {
     switch (action.type) {
         case 'SET_TAGS':
-            return action.payload.data;
+            return action.payload;
         default:
             return state;
     }
