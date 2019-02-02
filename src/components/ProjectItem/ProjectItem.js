@@ -4,7 +4,10 @@ class ProjectItem extends Component{
     render(){
         return(
             <div>
-
+                <div>
+                    
+                </div>
+                <hr />
             </div>
         );
     }

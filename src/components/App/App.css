@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: sandybrown;
 }
 
 
@@ -21,4 +22,12 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.page{
+  max-width: 800px;
+  align-content: center;
+  margin: 0 auto;
+  background-color: whitesmoke;
+  min-height: 1000px;
 }
