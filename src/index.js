@@ -9,10 +9,24 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put } from 'redux-saga/effects';
+//axios for server talking
+import axios from 'axios';
 
 // Create the rootSaga generator function
 function* rootSaga() {
+    yield takeEvery('FETCH_TAGS', fetchTags);
+}
 
+function* fetchTags(action) {
+    try {
+        const tags = yield axios.get('/tags');
+        const nextAction = { type: 'SET_TAGS', payload: tags };
+        yield put(nextAction);
+    } catch (error) {
+        console.log(error);
+        alert(error);
+    }
 }
 
 // Create sagaMiddleware
@@ -32,7 +46,7 @@ const projects = (state = [], action) => {
 const tags = (state = [], action) => {
     switch (action.type) {
         case 'SET_TAGS':
-            return action.payload;
+            return action.payload.data;
         default:
             return state;
     }
