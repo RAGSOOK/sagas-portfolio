@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class ProjectForm extends Component{
     constructor(props){
@@ -11,28 +12,33 @@ class ProjectForm extends Component{
             wurl: '',
             description: ''
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleSubmit(event){
         event.preventDefault();
-        console.log('Submitted');
+        const action = {type: 'SEND_PROJECT',
+                        payload: this.state};
+        this.props.dispatch(action);
     }
 
     handleChange(event){
-        this.setState({ [event.target.name]: event.target.value })
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <input type='text' placeholder='Project Name' name='name'/>
-                <input type='date' name='date'/>
-                <input type='text' placeholder='category' name='category'/>
+                <input onChange={this.handleChange} type='text' placeholder='Project Name' name='name'/>
+                <input onChange={this.handleChange} type='date' name='date'/>
+                <input onChange={this.handleChange} type='text' placeholder='category' name='category'/>
                 <br />
-                <input type='text' placeholder='Github URL' name='gurl'/>
-                <input type='text' placeholder='Website' name='wurl'/>
+                <input onChange={this.handleChange} type='text' placeholder='Github URL' name='gurl'/>
+                <input onChange={this.handleChange} type='text' placeholder='Website' name='wurl'/>
                 <br />
-                <input type='text' placeholder='Description' name='description'/>
+                <input onChange={this.handleChange} type='text' placeholder='Description' name='description'/>
                 <br />
                 <button type='submit' value='Submit'>Submit</button>
             </form>
@@ -40,4 +46,4 @@ class ProjectForm extends Component{
     }
 }
 
-export default ProjectForm;
+export default connect()(ProjectForm);

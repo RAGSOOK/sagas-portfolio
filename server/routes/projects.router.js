@@ -16,4 +16,20 @@ router.get('/', (req, res) => {
         });
 });
 
+router.post('/', (req, res) => {
+    const newProject = req.body;
+    const queryText = `INSERT INTO "projects" ("name", "description", "website", "github", 
+                       "date_completed", "tag_id")
+                       VALUES ($1, $2, $3, $4, $5, $6);`;
+    pool.query(queryText, [newProject.name, newProject.description,
+                           newProject.wurl, newProject.gurl,
+                           newProject.date, newProject.category] )
+    .then((response) => {
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+});
+
 module.exports = router;
