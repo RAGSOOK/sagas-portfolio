@@ -4,8 +4,9 @@ import ProjectItem from '../ProjectItem/ProjectItem.js';
 
 class ProjectPage extends Component{
 
-    componentDidMount(){
+    componentWillMount(){
         this.getProjects();
+        this.getTags();
     }
 
     getProjects(){
@@ -13,10 +14,16 @@ class ProjectPage extends Component{
         this.props.dispatch(action);
     }
 
+    getTags(){
+        const action = {type: 'FETCH_TAGS'};
+        this.props.dispatch(action);
+    }
+
     render(){
         return(
             <div>
                 <h3>Cody Troop</h3>
+                <hr />
 
                 {this.props.reduxStore.projects !== undefined
                     && 

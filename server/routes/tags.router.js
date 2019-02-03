@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     // return all tags
-    const queryText = `SELECT * FROM tags ORDER BY name ASC`;
+    const queryText = `SELECT * FROM tags ORDER BY id ASC`;
     pool.query(queryText)
         .then( (result) => {
             res.send(result.rows);
