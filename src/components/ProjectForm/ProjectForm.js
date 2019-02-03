@@ -33,7 +33,7 @@ class ProjectForm extends Component{
             <form onSubmit={this.handleSubmit}>
                 <input onChange={this.handleChange} type='text' placeholder='Project Name' name='name'/>
                 <input onChange={this.handleChange} type='date' name='date'/>
-                <input onChange={this.handleChange} type='text' placeholder='category' name='category'/>
+                <input onChange={this.handleChange} type='number' placeholder='category' name='category'/>
                 <br />
                 <input onChange={this.handleChange} type='text' placeholder='Github URL' name='gurl'/>
                 <input onChange={this.handleChange} type='text' placeholder='Website' name='wurl'/>
