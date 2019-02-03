@@ -82,7 +82,10 @@ const projects = (state = [], action) => {
 }
 
 // Used to store the project tags (e.g. 'React', 'jQuery', 'Angular', 'Node.js')
-const tags = (state = [], action) => {
+const defaultState = [{id: 0,
+                       name: ''}];
+
+const tags = (state = defaultState, action) => {
     switch (action.type) {
         case 'SET_TAGS':
             return action.payload;
