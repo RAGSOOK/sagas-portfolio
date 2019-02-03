@@ -17,6 +17,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_TAGS', fetchTags);
     yield takeEvery('FETCH_PROJECTS', fetchProjects);
+    yield takeEvery('SEND_PROJECT', sendProject);
 }
 
 //Gets all tags from server and sends them to tags reducer
@@ -40,6 +41,16 @@ function* fetchProjects(action) {
     } catch (error) {
         console.log(error);
         alert(error);
+    }
+}
+
+function* sendProject(action) {
+    try{
+        yield axios.post('/projects', action.payload);
+        const nextAction = { type: 'FETCH_PROJECTS' };
+        yield put(nextAction);
+    } catch (error) {
+        console.log('There is error in POST', error);
     }
 }
 
