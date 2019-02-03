@@ -1,0 +1,10 @@
+.wholeProject{
+    min-height: 300px;
+    border-style: ridge;
+    float: left;
+}
+
+.projectImage{
+    width: 250px;
+    height: 250px;
+}
