@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class ProjectRow extends Component{
+    constructor(props){
+        super(props);
+
+        this.handleDelete = this.handleDelete.bind(this);
+    }
 
     handleDelete(){
         const action = {type: 'DELETE_PROJECT', 

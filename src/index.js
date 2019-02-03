@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_TAGS', fetchTags);
     yield takeEvery('FETCH_PROJECTS', fetchProjects);
     yield takeEvery('SEND_PROJECT', sendProject);
+    yield takeEvery('DELETE_PROJECT', deleteProject);
 }
 
 //Gets all tags from server and sends them to tags reducer
@@ -44,6 +45,7 @@ function* fetchProjects(action) {
     }
 }
 
+//sends a new project to server
 function* sendProject(action) {
     try{
         yield axios.post('/projects', action.payload);
@@ -51,6 +53,18 @@ function* sendProject(action) {
         yield put(nextAction);
     } catch (error) {
         console.log('There is error in POST', error);
+    }
+}
+
+//Sends an id of a project to the server to delete
+function* deleteProject(action) {
+    const id = action.payload;
+    try{
+        yield axios.delete(`/projects/${id}`);
+        const nextAction = { type: 'FETCH_PROJECTS' };
+        yield put(nextAction);
+    } catch (error) {
+        console.log('There is error in DELETE', error);
     }
 }
 
