@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 class ProjectItem extends Component{
 
+    //renders the category name of the matching id
     determineCategory(){
         const index = (this.props.project.tag_id - 1);
         console.log(this.props.reduxStore.tags[index].name);

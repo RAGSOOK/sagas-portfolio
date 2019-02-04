@@ -13,10 +13,24 @@ class ProjectForm extends Component{
             description: ''
         }
 
+        //these lines ensure when 'this' is referenced in a function, it references 
+        //the componenet ProjectForm
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
+
+    componentDidMount(){
+        this.getTags();
+    }
+
+    //gets tags for dropdown menu
+    getTags(){
+        const action = {type: 'FETCH_TAGS'};
+        this.props.dispatch(action);
+    }
+
+    //send input to sagas in the redux store 
     handleSubmit(event){
         event.preventDefault();
         const action = {type: 'SEND_PROJECT',
@@ -24,6 +38,7 @@ class ProjectForm extends Component{
         this.props.dispatch(action);
     }
 
+    //handles changes for input fields
     handleChange(event){
         this.setState({ [event.target.name]: event.target.value });
     }

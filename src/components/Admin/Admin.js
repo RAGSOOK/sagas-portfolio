@@ -6,15 +6,6 @@ import ProjectForm from '../ProjectForm/ProjectForm.js';
 
 class Admin extends Component{
 
-    componentDidMount(){
-        this.getTags();
-    }
-
-    getTags(){
-        const action = {type: 'FETCH_TAGS'};
-        this.props.dispatch(action);
-    }
-
     render(){
         return(
             <div>
@@ -24,8 +15,8 @@ class Admin extends Component{
 
                 <ProjectForm />
 
+                <h3>Projects</h3>
                 <ProjectTable />
-
 
             </div>
         );
